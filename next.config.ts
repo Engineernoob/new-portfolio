@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "github-readme-stats.vercel.app", // The domain of the image source
+        hostname: "github-readme-streak-stats.herokuapp.com", // The domain of the image source
         // port: '', // No port needed for standard HTTPS
         // pathname: '/api/**', // Optional: restrict to specific paths if needed
       },
