@@ -1,3 +1,6 @@
+"use client";
+
+import React from "react"; // <-- Fixes the 'React was read but never declared' error
 import Image from "next/image";
 
 // The GitHub username from the resume
@@ -17,8 +20,8 @@ export function GitHubGraph() {
       {/* The main container for the graph */}
       <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50 shadow-lg">
         {/*
-          The dynamic SVG is embedded here. 
-          We use a block style and a large width to make it responsive and fit the design.
+          We use the native 'img' tag, NOT the Next.js 'Image' component,
+          as this is an external, non-optimized SVG.
         */}
         <Image
           src={GRAPH_URL}
