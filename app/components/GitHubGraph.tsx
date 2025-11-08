@@ -26,6 +26,8 @@ export function GitHubGraph() {
         <Image
           src={GRAPH_URL}
           alt={`${GITHUB_USERNAME}'s GitHub Contribution Graph`}
+          width={800}
+          height={300}
           className="w-full h-auto"
           loading="lazy"
         />
