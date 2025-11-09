@@ -4,7 +4,7 @@
 import { EXPERIENCE_DATA } from "../data/experience";
 import { ExperienceCard } from "./ExperienceCard"; // Keep the card name
 
-export function ProjectsSection() {
+export function ExperienceSection() {
   return (
     // Updated ID to match the navigation link
     <section id="projects" className="py-16 lg:py-24 max-w-7xl mx-auto px-4">

@@ -1,6 +1,7 @@
 import { NewLayout } from "./components/NewLayout";
-import { ProjectsSection } from "./components/ProjectSection";
+import { ExperienceSection } from "./components/ExperienceSection";
 import { SkillsSection } from "./components/SkillSection";
+import { PersonalProjectsSection } from "./components/PersonalProjectsSection";
 import { GitHubGraph } from "./components/GitHubGraph";
 import { Footer } from "./components/Footer";
 
@@ -40,8 +41,9 @@ export default function Home() {
   return (
     <NewLayout>
       <AboutSection />
-      <ProjectsSection />{" "}
+      <ExperienceSection />{" "}
       {/* Renamed to 'Experience & Projects' in its component */}
+      <PersonalProjectsSection />
       <SkillsSection /> {/* Renamed to 'Technical Skills' in its component */}
       <GitHubGraph />
       {/* The Footer can be a simplified connect section */}

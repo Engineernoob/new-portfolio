@@ -1,12 +1,13 @@
 "use client";
 
-import { User, Briefcase, Code, Mail, Github, Linkedin } from "lucide-react";
+import { User, Briefcase, Code, Mail, Github, Linkedin, Book } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher"; // Reuse the existing theme switcher
 import Image from "next/image";
 
 const navItems = [
   { name: "About", href: "#about", icon: User },
-  { name: "Experience", href: "#projects", icon: Briefcase },
+  { name: "Experience", href: "#projects", icon: Book },
+  { name: 'Personal Projects', href: '#personal-projects', icon: Briefcase },
   { name: "Skills", href: "#stack", icon: Code },
   { name: "Connect", href: "#connect", icon: Mail },
 ];
@@ -32,7 +33,6 @@ export function Sidebar() {
         </p>
       </div>
 
-      {/* Main Navigation */}
       <nav className="flex flex-col space-y-2 py-6 border-b border-gray-200 dark:border-gray-800">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -40,7 +40,12 @@ export function Sidebar() {
             <a
               key={item.name}
               href={item.href}
-              className="flex items-center space-x-3 p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-accent-dark/10 hover:text-accent-dark transition-colors"
+              className="flex items-center space-x-3 p-2 rounded-lg 
+                   text-gray-600 dark:text-gray-300 
+                   hover:bg-accent-dark/10 hover:text-accent-dark 
+                   transition-all duration-300 ease-in-out // <-- ADD utility
+                   hover:translate-x-1 // <-- ADD subtle movement on hover
+                   focus:ring-2 focus:ring-accent-dark focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
             >
               <Icon className="w-5 h-5" />
               <span className="font-medium">{item.name}</span>
