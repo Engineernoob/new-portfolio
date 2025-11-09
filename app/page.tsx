@@ -1,32 +1,36 @@
-import { Header } from "./components/Header";
-import { HeroSection } from "./components/Hero";
+import { NewLayout } from "./components/NewLayout";
 import { ProjectsSection } from "./components/ProjectSection";
 import { SkillsSection } from "./components/SkillSection";
 import { GitHubGraph } from "./components/GitHubGraph";
-import { Footer } from "./components/Footer"; // Import the new Footer component
+import { Footer } from "./components/Footer";
 
-// Simple placeholder for the About section (ID #about) - remains the same
+// NOTE: We don't need HeroSection anymore, the intro is in the Sidebar.
+// The AboutSection needs to be simplified to match the content style.
+
 const AboutSection = () => (
-  // ... (AboutSection code from step 19)
-  <section id="about" className="py-16 lg:py-24 max-w-7xl mx-auto px-4">
-    <h2 className="text-4xl font-bold text-white mb-10 border-b-4 border-accent-dark inline-block pb-1">
+  <section id="about" className="mb-16">
+    <h2 className="text-3xl font-bold text-accent-dark mb-6 border-b-2 pb-2 border-gray-200 dark:border-gray-800">
       About Me
     </h2>
-    <div className="text-lg text-gray-300 space-y-4 max-w-3xl">
+    <div className="text-lg text-gray-700 dark:text-gray-300 space-y-4">
       <p>
-        I am a highly motivated AI Systems Engineer and Full Stack Developer. My
-        passion lies in building and scaling complex applications, leveraging
-        modern frameworks like Next.js and specialized tools for AI/ML. My
-        experience is centered around delivering measurable results, from
-        optimizing backend performance to deploying cross-platform desktop
-        assistants.
+        A dedicated **AI Systems Engineer** and Full Stack Developer, I
+        specialize in building, optimizing, and deploying complex, real-time
+        machine learning applications, from local LLM orchestrators to
+        large-scale data pipelines. My focus is on creating scalable, efficient,
+        and user-friendly systems.
       </p>
       <p>
-        I hold a Bachelor of Science in Computer Science from Lewis University,
-        where I built a strong foundation in algorithms, data structures, and
-        system design. Currently, I&apos;m focused on contributing to projects
-        that sit at the intersection of high-performance web development and
-        cutting-edge machine learning.
+        I hold a Bachelor of Science in Computer Science from Lewis University.
+        I&apos;m currently seeking roles that challenge me to integrate
+        high-performance web development with cutting-edge machine learning.
+      </p>
+      {/* Add the Education section here to fill out the About content */}
+      <h3 className="text-xl font-semibold mt-6 pt-4 border-t border-gray-200 dark:border-gray-800">
+        Education
+      </h3>
+      <p className="font-medium">
+        Lewis University - Bachelors of Science, Computer Science
       </p>
     </div>
   </section>
@@ -34,23 +38,15 @@ const AboutSection = () => (
 
 export default function Home() {
   return (
-    <main>
-      <Header />
-
-      <div className="mt-8">
-        <HeroSection />
-
-        <AboutSection />
-
-        <ProjectsSection />
-
-        <SkillsSection />
-
-        <GitHubGraph />
-      </div>
-
-      {/* 6. Footer/Connect section */}
+    <NewLayout>
+      <AboutSection />
+      <ProjectsSection />{" "}
+      {/* Renamed to 'Experience & Projects' in its component */}
+      <SkillsSection /> {/* Renamed to 'Technical Skills' in its component */}
+      <GitHubGraph />
+      {/* The Footer can be a simplified connect section */}
+      {/* We'll use the existing Footer but rename the ID to #connect */}
       <Footer />
-    </main>
+    </NewLayout>
   );
 }
