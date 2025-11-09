@@ -53,7 +53,7 @@ export default function RootLayout({
             the --font-inter variable when applied to the html tag above.
             We'll also keep the base styling.
           */}
-          <div className="font-sans min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+          <div className="font-sans min-h-screen bg-black dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
             {children}
           </div>
         </Providers>

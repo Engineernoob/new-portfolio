@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
         // port: '', // No port needed for standard HTTPS
         // pathname: '/api/**', // Optional: restrict to specific paths if needed
       },
+      {
+        protocol: "https",
+        hostname: "ghchart.rshah.org",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
       // If you plan to display any GitHub profile images (avatars), add this one too:
       // {
       //   protocol: 'https',
