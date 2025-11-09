@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 
 // The GitHub username from the resume
 const GITHUB_USERNAME = "Engineernoob";
 
-// *** NEW, WORKING URL ***
+// The fully customized URL for the dynamic SVG graph
 const GRAPH_URL = `https://github-readme-streak-stats.herokuapp.com/?user=${GITHUB_USERNAME}&theme=dark&hide_border=true`;
 
 export function GitHubGraph() {
@@ -22,12 +21,13 @@ export function GitHubGraph() {
         <Image
           src={GRAPH_URL}
           alt={`${GITHUB_USERNAME}'s GitHub Streak Stats`}
-          // Adjusted dimensions for the Streak Stats component (usually thinner)
           width={600}
           height={200}
+          // CRITICAL FIX: Add unoptimized={true} for external SVGs
+          unoptimized={true}
           // These classes keep it responsive but centered
           className="w-full max-w-xl h-auto"
-          sizes="(max-width: 640px) 100vw, 600px" // Responsive sizes to help Next.js
+          sizes="(max-width: 640px) 100vw, 600px"
           priority={false}
         />
 

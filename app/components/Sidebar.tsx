@@ -1,6 +1,6 @@
 "use client";
 
-import { User, Briefcase, Code, Mail, Github, Linkedin, Book } from "lucide-react";
+import { User, Briefcase, Code, Mail, Github, Linkedin, Book, FileText } from "lucide-react";
 import { ThemeSwitcher } from "./ThemeSwitcher"; // Reuse the existing theme switcher
 import Image from "next/image";
 
@@ -8,6 +8,7 @@ const navItems = [
   { name: "About", href: "#about", icon: User },
   { name: "Experience", href: "#projects", icon: Book },
   { name: 'Personal Projects', href: '#personal-projects', icon: Briefcase },
+  { name: 'Blog', href: '/blog', icon: FileText },
   { name: "Skills", href: "#stack", icon: Code },
   { name: "Connect", href: "#connect", icon: Mail },
 ];
