@@ -14,6 +14,8 @@ const navLinks = [
 ];
 
 const heroSocials = SOCIAL_LINKS;
+const HERO_IMAGE_URL =
+  "https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg";
 const stackLogos = [
   "Java",
   "Python",
@@ -24,6 +26,7 @@ const stackLogos = [
   "Rust",
   "Tauri",
 ];
+const PROFILE_IMAGE_POSITION = "50% 38%";
 
 const ABOUT_PARAGRAPHS = [
   "I love exploring ideas through code, design, and whatever medium feels right for the problem. Most of my time goes into building systems that make life simpler or spark curiosity—blending structure with imagination.",
@@ -103,7 +106,7 @@ function HeroBanner() {
   return (
     <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
       <Image
-        src="/profile.png"
+        src={HERO_IMAGE_URL}
         alt="Taahirah Denmark hero"
         fill
         className="object-cover"
@@ -134,6 +137,7 @@ function ProfileCard() {
             width={112}
             height={112}
             className="h-full w-full rounded-full object-cover"
+            style={{ objectPosition: PROFILE_IMAGE_POSITION }}
             priority
           />
         </div>

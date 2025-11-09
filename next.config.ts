@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
       // If you plan to display any GitHub profile images (avatars), add this one too:
       // {
       //   protocol: 'https',
