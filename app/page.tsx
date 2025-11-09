@@ -113,8 +113,7 @@ function HeroBanner() {
         priority
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
-      <div className="relative flex h-full w-full flex-col justify-end p-10">
-        <p className="text-xs uppercase tracking-[0.65em] text-gray-300">Taahirah Denmark</p>
+      <div className="relative flex h-full w-full flex-col justify-center p-10">
         <h1 className="mt-4 max-w-xl text-3xl font-semibold leading-snug text-white md:text-4xl">
           Thoughts, systems, and everything in between.
         </h1>
@@ -134,8 +133,8 @@ function ProfileCard() {
           <Image
             src="/profile.png"
             alt="Taahirah Denmark"
-            width={112}
-            height={112}
+            width={170}
+            height={160}
             className="h-full w-full rounded-full object-cover"
             style={{ objectPosition: PROFILE_IMAGE_POSITION }}
             priority
