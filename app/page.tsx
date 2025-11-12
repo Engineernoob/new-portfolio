@@ -1,37 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { Calendar } from "lucide-react";
+import { ThemeSwitcher } from "./components/ThemeSwitcher";
 
 import { EXPERIENCE_DATA } from "./data/experience";
-import { SKILLS_DATA } from "./data/skills";
 import { SOCIAL_LINKS } from "./data/socials";
 
-const accentColor = "#f4b17a";
+const accentColor = "#0aff99";
 const navLinks = [
   { label: "proof-of-work", href: "#experience" },
   { label: "blogs", href: "/blog" },
-  { label: "stack", href: "#stack" },
+  { label: "art", href: "#art" },
 ];
 
 const heroSocials = SOCIAL_LINKS;
 const HERO_IMAGE_URL =
   "https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg";
-const stackLogos = [
+const stackTechnologies = [
+  "JavaScript",
+  "TypeScript",
   "Java",
   "Python",
   "SQL",
-  "React",
+  "React.js",
   "Next.js",
   "Express.js",
-  "Rust",
-  "Tauri",
+  "Node.js",
+  "FastAPI",
+  "Tailwind CSS",
+  "MongoDB",
+  "PostgreSQL",
+  "Redis",
+  "Git",
+  "Docker",
+  "Azure",
+  "AWS",
+  "Google Cloud",
+  "Jira",
+  "Nix OS",
 ];
 const PROFILE_IMAGE_POSITION = "50% 38%";
 
 const ABOUT_PARAGRAPHS = [
-  "I love exploring ideas through code, design, and whatever medium feels right for the problem. Most of my time goes into building systems that make life simpler or spark curiosity—blending structure with imagination.",
-  "I am currently open to part-time and full-time roles that let me dive into interesting systems, collaborate on experimental ideas, or ship thoughtful tools.",
+  "I'm someone who loves exploring ideas. through code, design, and whatever medium feels right that day. I spend most of my time building things that make life a bit simpler or spark curiosity, often blending structure with imagination.",
+  "Outside of work, I am a part-time artist and a full-time cinephile and audiophile. I enjoy stories in all forms, whether that's film, sound, or the small experiments that keep me inspired.",
 ];
+
+const AVAILABILITY_TEXT =
+  "Currently open to part‑time and contract roles, The kind that let me dive deep into interesting systems, build creative tools, or collaborate on experimental ideas.";
 
 const GITHUB_USERNAME = "Engineernoob";
 const GITHUB_CHART_URL = `https://ghchart.rshah.org/0aff99/${GITHUB_USERNAME}`;
@@ -65,7 +81,6 @@ export default function Home() {
         <NavBar />
         <HeroBanner />
         <ProfileCard />
-        <AboutSection />
         <ExperienceSection />
         <ContributionsSection />
         <GitHubSection />
@@ -79,15 +94,11 @@ export default function Home() {
 
 function NavBar() {
   return (
-    <nav className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between py-8 text-[0.65rem] uppercase tracking-[0.4em] text-gray-500">
-      <div className="flex items-center gap-3 text-gray-300">
-        <span className="text-sm font-semibold tracking-[0.6em] text-white">
-          TAHIRAH
-        </span>
-        <span className="h-px w-12 bg-white/20" />
-        <span>portfolio</span>
+    <nav className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between py-8 text-sm text-gray-300">
+      <div className="flex items-center gap-3">
+        <span className="text-lg font-semibold text-white">Taahirah</span>
       </div>
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center gap-6">
         {navLinks.map((item) => (
           <Link
             key={item.label}
@@ -97,6 +108,7 @@ function NavBar() {
             {item.label}
           </Link>
         ))}
+        <ThemeSwitcher />
       </div>
     </nav>
   );
@@ -104,7 +116,7 @@ function NavBar() {
 
 function HeroBanner() {
   return (
-    <div className="relative h-72 w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
+    <div className="relative h-[500px] w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
       <Image
         src={HERO_IMAGE_URL}
         alt="Taahirah Denmark hero"
@@ -112,10 +124,10 @@ function HeroBanner() {
         className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
-      <div className="relative flex h-full w-full flex-col justify-center p-10">
-        <h1 className="mt-4 max-w-xl text-3xl font-semibold leading-snug text-white md:text-4xl">
-          Thoughts, systems, and everything in between.
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="relative flex h-full w-full flex-col justify-center items-center p-10">
+        <h1 className="text-center text-4xl md:text-5xl font-light italic leading-snug text-white">
+          Thoughts, pixels, and everything in between
         </h1>
       </div>
     </div>
@@ -125,69 +137,59 @@ function HeroBanner() {
 function ProfileCard() {
   return (
     <section
-      className={`${cardClass} -mt-14 p-8 md:-mt-16 md:p-10`}
+      className={`${cardClass} -mt-20 p-8 md:-mt-24 md:p-10`}
       aria-labelledby="profile-heading"
     >
-      <div className="flex flex-col gap-6 md:flex-row md:items-center">
-        <div className="relative h-28 w-28 shrink-0 rounded-full border-4 border-[#050505] bg-white/5">
-          <Image
-            src="/profile.png"
-            alt="Taahirah Denmark"
-            width={170}
-            height={160}
-            className="h-full w-full rounded-full object-cover"
-            style={{ objectPosition: PROFILE_IMAGE_POSITION }}
-            priority
-          />
-        </div>
-        <div className="flex-1 space-y-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.6em] text-gray-400">
-              AI systems • ideas • stories
-            </p>
-            <h2
-              id="profile-heading"
-              className="mt-3 text-3xl font-semibold text-white"
-            >
-              Taahirah Denmark
-            </h2>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col md:flex-row md:items-start gap-6">
+          <div className="relative h-32 w-32 shrink-0 rounded-full border-4 border-[#050505] bg-white/5 -mt-16 md:-mt-20">
+            <Image
+              src="/profile.png"
+              alt="Taahirah Denmark"
+              width={170}
+              height={160}
+              className="h-full w-full rounded-full object-cover"
+              style={{ objectPosition: PROFILE_IMAGE_POSITION }}
+              priority
+            />
           </div>
-          <p className="text-base text-gray-400">
-            AI systems engineer & full-stack developer designing thoughtful
-            tools, orchestration layers, and interfaces across the stack.
-          </p>
-        </div>
-        <div className="flex w-full flex-wrap gap-3 md:w-auto md:justify-end">
-          {heroSocials.map((link) => {
-            const Icon = link.icon;
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.name}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-gray-400 transition hover:border-(--accent-color) hover:text-white"
-                style={{ ["--accent-color" as string]: accentColor }}
+          <div className="flex-1 space-y-4">
+            <div>
+              <h2
+                id="profile-heading"
+                className="text-4xl md:text-5xl font-semibold text-white"
               >
-                <Icon className="h-4 w-4" />
-              </a>
-            );
-          })}
+                Taahirah Denmark
+              </h2>
+              <p className="mt-2 text-lg text-gray-400">
+                21 • ideas • systems • stories
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {heroSocials.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.name}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-gray-400 transition hover:border-[#0aff99] hover:text-white"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function AboutSection() {
-  return (
-    <section id="about" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <SectionHeader eyebrow="about" title="Curiosity-led, systems-minded" />
-      <div className="mt-6 space-y-5 text-lg leading-relaxed text-gray-300">
-        {ABOUT_PARAGRAPHS.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+        <div className="mt-6 space-y-4 text-base leading-relaxed text-gray-300">
+          {ABOUT_PARAGRAPHS.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+          <p className="text-gray-400 italic">{AVAILABILITY_TEXT}</p>
+        </div>
       </div>
     </section>
   );
@@ -196,32 +198,31 @@ function AboutSection() {
 function ExperienceSection() {
   return (
     <section id="experience" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <SectionHeader eyebrow="professional experience" title="Proof-of-work" />
-      <div className="mt-8 divide-y divide-white/5">
+      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-8">
+        Professional Experience
+      </h2>
+      <div className="mt-8 space-y-6">
         {EXPERIENCE_DATA.map((experience) => (
           <div
             key={experience.id}
-            className="flex flex-col gap-5 py-6 md:flex-row md:items-center"
+            className="flex flex-col gap-4 md:flex-row md:items-start"
           >
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-sm font-semibold text-white/80">
+            <div className="flex items-center gap-4 flex-1">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-white/80 shrink-0">
                 {getInitials(experience.context)}
               </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-gray-500">
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-white mb-1">
                   {experience.context}
-                </p>
-                <h3 className="text-lg font-semibold text-white">
-                  {experience.title}
                 </h3>
+                <p className="text-base text-gray-300 mb-1">
+                  {experience.title}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {experience.period}
+                </p>
               </div>
             </div>
-            <div className="flex-1 text-sm text-gray-400">
-              {stripBold(experience.subTitle)}
-            </div>
-            <p className="text-sm text-gray-500 md:text-right">
-              {experience.period}
-            </p>
           </div>
         ))}
       </div>
@@ -232,17 +233,23 @@ function ExperienceSection() {
 function ContributionsSection() {
   return (
     <section id="contributions" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <SectionHeader
-        eyebrow="contributions"
-        title="Where experiments met scale"
-      />
+      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
+        Contributions
+      </h2>
+      <p className="text-base text-gray-300 mb-6 leading-relaxed">
+        I've spent the past few years moving between startups, open-source, and R&D labs, where experimentation meets scale.
+      </p>
       <div className="mt-6 space-y-6 text-gray-300">
-        {contributions.map((item) => (
-          <p key={item.title} className="text-base leading-relaxed">
+        {contributions.map((item, index) => (
+          <p key={index} className="text-base leading-relaxed">
             <span className="font-semibold text-white">{item.title} </span>
             {item.body}
           </p>
         ))}
+        <p className="text-base leading-relaxed mt-6">
+          <span className="font-semibold text-white">0→100 </span>
+          systems and ideas building what I want to see exist.
+        </p>
       </div>
     </section>
   );
@@ -251,10 +258,9 @@ function ContributionsSection() {
 function GitHubSection() {
   return (
     <section id="github" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <SectionHeader
-        eyebrow="github"
-        title={`Contributions @${GITHUB_USERNAME}`}
-      />
+      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
+        GitHub Contributions • @{GITHUB_USERNAME}
+      </h2>
       <div className="mt-6 rounded-2xl border border-white/5 bg-black/40 p-6">
         <div className="rounded-2xl bg-[#0d0d0d] p-4">
           <Image
@@ -266,9 +272,6 @@ function GitHubSection() {
             className="h-auto w-full"
           />
         </div>
-        <p className="mt-3 text-xs text-gray-500">
-          Data sourced directly from GitHub — less is calm, more is momentum.
-        </p>
       </div>
     </section>
   );
@@ -277,30 +280,19 @@ function GitHubSection() {
 function StackSection() {
   return (
     <section id="stack" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <SectionHeader
-        eyebrow="stack i use"
-        title="Tools for shipping real systems"
-      />
-      <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {stackLogos.map((item) => (
+      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+        Stack I use
+      </h2>
+      <p className="text-base text-gray-400 mb-8">
+        Technologies I work with to build products that solve real problems
+      </p>
+      <div className="mt-8 flex flex-wrap gap-4">
+        {stackTechnologies.map((tech) => (
           <div
-            key={item}
-            className="flex h-24 flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sm font-semibold tracking-wide text-gray-100"
+            key={tech}
+            className="flex h-20 min-w-[120px] flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 text-sm font-semibold text-gray-100 hover:border-[#0aff99] transition-colors"
           >
-            {item}
-          </div>
-        ))}
-      </div>
-      <div className="mt-6 grid gap-4 text-sm leading-relaxed text-gray-400 sm:grid-cols-2">
-        {SKILLS_DATA.map((category) => (
-          <div
-            key={category.category}
-            className="rounded-2xl border border-white/5 bg-black/20 p-4"
-          >
-            <p className="text-xs uppercase tracking-[0.4em] text-gray-500">
-              {category.category}
-            </p>
-            <p className="mt-2 text-gray-300">{category.skills}</p>
+            {tech}
           </div>
         ))}
       </div>
@@ -312,20 +304,15 @@ function CtaSection() {
   return (
     <section className={`${cardClass} mt-10 p-8 md:p-10`}>
       <div className="flex flex-col items-center text-center">
-        <SectionHeader
-          eyebrow="collaborations"
-          title="If you made it this far, let’s talk."
-        />
-        <p className="mt-6 max-w-2xl text-base leading-relaxed text-gray-300">
-          I collaborate with people who want thoughtful systems—not more noise.
-          I’m open to advising, rapid prototyping, and full-stack engagements.
+        <p className="text-lg text-gray-300 mb-6">
+          If you've read this far, you might be interested in what I do.
         </p>
         <a
           href="mailto:taahirah.engineer@proton.me"
-          className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:border-(--accent-color) hover:bg-(--accent-color) hover:text-black"
-          style={{ ["--accent-color" as string]: accentColor }}
+          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-8 py-4 text-base font-semibold text-white transition hover:border-[#0aff99] hover:bg-[#0aff99] hover:text-black"
         >
-          Contact Me <ArrowUpRight className="h-4 w-4" />
+          <Calendar className="h-5 w-5" />
+          Book a Free Call
         </a>
       </div>
     </section>
@@ -334,44 +321,38 @@ function CtaSection() {
 
 function FooterSection() {
   return (
-    <footer className="mt-12 border-t border-white/5 pt-8 text-center text-sm text-gray-500">
-      <p>
-        &copy; {new Date().getFullYear()} Taahirah Denmark. Crafted with
-        curiosity.
-      </p>
-      <div className="mt-4 flex justify-center gap-4">
-        {SOCIAL_LINKS.map((link) => {
-          const Icon = link.icon;
-          return (
-            <a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-gray-400 transition hover:text-white"
-            >
-              <Icon className="h-4 w-4" />
-            </a>
-          );
-        })}
+    <footer className="mt-12 border-t border-white/5 pt-8">
+      <div className="mb-8">
+        <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+          Let's connect
+        </h2>
+        <p className="text-base text-gray-400 mb-6">
+          Find me on these platforms
+        </p>
+        <div className="flex flex-wrap gap-4">
+          {SOCIAL_LINKS.map((link) => {
+            const Icon = link.icon;
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 transition hover:border-[#0aff99] hover:text-white"
+              >
+                <Icon className="h-4 w-4" />
+                <span>{link.name}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+      <div className="mt-8 text-center text-sm text-gray-500">
+        <p>
+          &copy; {new Date().getFullYear()} Taahirah Denmark.
+        </p>
       </div>
     </footer>
   );
 }
 
-function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return (
-    <div>
-      <p className="text-[0.6rem] uppercase tracking-[0.5em] text-gray-500">
-        {eyebrow}
-      </p>
-      <h3 className="mt-3 text-2xl font-semibold text-white md:text-3xl">
-        {title}
-      </h3>
-      <div
-        className="mt-3 h-px w-16"
-        style={{ backgroundColor: accentColor }}
-      />
-    </div>
-  );
-}

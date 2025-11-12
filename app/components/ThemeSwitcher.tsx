@@ -2,9 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react"; // You'll need to install lucide-react or another icon library
-
-// Install icon library: npm install lucide-react
+import { Moon, Sun } from "lucide-react";
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -25,10 +23,9 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={toggleTheme}
-      aria-label="Toggle Dark Mode"
-      className="p-2 rounded-full text-white bg-accent-dark hover:bg-opacity-80 transition-colors duration-300"
+      aria-label="Toggle theme"
+      className="p-2 text-gray-300 hover:text-white transition-colors duration-200"
     >
-      {/* Conditionally render the icon based on the current theme */}
       {theme === "dark" ? (
         <Sun className="h-5 w-5" />
       ) : (
