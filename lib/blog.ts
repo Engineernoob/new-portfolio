@@ -13,7 +13,7 @@ export interface Post {
 }
 
 // 1. Define the directory where your markdown files will live
-const postsDirectory = path.join(process.cwd(), "src/posts");
+const postsDirectory = path.join(process.cwd(), "posts");
 
 /**
  * Reads all post files, parses the frontmatter and content, and returns a sorted list.
@@ -53,4 +53,26 @@ export function getSortedPostsData(): Post[] {
       return -1;
     }
   });
+}
+
+/**
+ * Gets a single post by its slug
+ */
+export function getPostBySlug(slug: string): Post | null {
+  try {
+    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const matterResult = matter(fileContents);
+
+    return {
+      slug,
+      content: matterResult.content,
+      title: matterResult.data.title || "Untitled Post",
+      date: matterResult.data.date || new Date().toISOString().split("T")[0],
+      summary: matterResult.data.summary || "No summary provided.",
+      tags: matterResult.data.tags || [],
+    } as Post;
+  } catch (error) {
+    return null;
+  }
 }
