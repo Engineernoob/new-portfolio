@@ -11,29 +11,48 @@ export interface PersonalProject {
 export const PERSONAL_PROJECTS: PersonalProject[] = [
   {
     id: 1,
-    title: "Local LLM Chat & Automation Desktop App",
+    title: "Origin : Youtube but better",
     description:
       "A cross-platform desktop application extending my work on Ada, utilizing Tauri and Rust to manage local language model (LLM) inference and route complex system commands via a secure, local API.",
-    techStack: ["Tauri", "Rust", "TypeScript", "Ollama", "WebSockets", "React"],
-    githubLink: "https://github.com/Engineernoob/tauri-llm-automation",
-    liveLink: undefined, // Desktop App, no live link
+    techStack: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "Lucide React",
+      "NextAuth",
+      "Supabase",
+      "Vercel",
+      "Docker",
+      "TypeScript",
+    ],
+    githubLink: "https://github.com/Engineernoob/origin",
   },
   {
     id: 2,
-    title: "Scalable E-commerce API in Go",
+    title: "Adaptive Job Neural Network (AJNN)",
     description:
-      "A personal project to master back-end performance. Developed a high-performance REST API for an e-commerce platform using Go, PostgreSQL, and Docker. Implements clean architecture and microservices principles.",
-    techStack: ["Go", "PostgreSQL", "Docker", "Clean Architecture", "Redis"],
-    githubLink: "https://github.com/Engineernoob/go-scalable-ecommerce",
-    liveLink: undefined,
+      "A job matching platform that uses a neural network to match users to jobs based on their skills and experience.",
+    techStack: ["Python", "TensorFlow", "Node.js", "Firebase"],
+    githubLink: "https://github.com/Engineernoob/ajnn",
+    liveLink: "https://ajnn.vercel.app",
   },
   {
     id: 3,
-    title: "Explainable AI Feature Dashboard",
+    title: "AI Interview Buddy",
+    description: "A real-time AI assistant for interview prep.",
+    techStack: ["React", "WebSockets", "Python", "NLP"],
+    githubLink: "https://github.com/Engineernoob/ai-interview-buddy",
+    liveLink: "https://ai-interview-buddy.vercel.app",
+  },
+  {
+    id: 4,
+    title: "AI-Powered Career Matching Platform",
     description:
-      "A dedicated React application demonstrating explainable AI (XAI) features using a simulated model. It visualizes feature importance (SHAP values) to build user trust in ML-driven recommendations (a conceptual extension of work on AJNN).",
-    techStack: ["React", "D3.js", "Python/Flask", "Scikit-learn", "SHAP"],
-    githubLink: "https://github.com/Engineernoob/xai-feature-dashboard",
-    liveLink: "https://xai-dashboard-demo.vercel.app",
+      "A job matching platform that uses a neural network to match users to jobs based on their skills and experience.",
+    techStack: ["Python", "TensorFlow", "Node.js", "Firebase"],
+    githubLink:
+      "https://github.com/Engineernoob/ai-powered-career-matching-platform",
+    liveLink: "https://ai-powered-career-matching-platform.vercel.app",
   },
 ];
