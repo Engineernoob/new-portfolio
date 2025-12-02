@@ -124,7 +124,7 @@ function HeroBanner() {
         className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
       <div className="relative flex h-full w-full flex-col justify-center items-center p-10">
         <h1 className="text-center text-4xl md:text-5xl font-light italic leading-snug text-white">
           Thoughts, pixels, and everything in between
@@ -162,7 +162,7 @@ function ProfileCard() {
                 Taahirah Denmark
               </h2>
               <p className="mt-2 text-lg text-gray-400">
-                21 • ideas • systems • stories
+                27 • AI • Systems • Stories
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -218,9 +218,7 @@ function ExperienceSection() {
                 <p className="text-base text-gray-300 mb-1">
                   {experience.title}
                 </p>
-                <p className="text-sm text-gray-500">
-                  {experience.period}
-                </p>
+                <p className="text-sm text-gray-500">{experience.period}</p>
               </div>
             </div>
           </div>
@@ -237,7 +235,8 @@ function ContributionsSection() {
         Contributions
       </h2>
       <p className="text-base text-gray-300 mb-6 leading-relaxed">
-        I've spent the past few years moving between startups, open-source, and R&D labs, where experimentation meets scale.
+        I've spent the past few years moving between startups, open-source, and
+        R&D labs, where experimentation meets scale.
       </p>
       <div className="mt-6 space-y-6 text-gray-300">
         {contributions.map((item, index) => (
@@ -348,11 +347,8 @@ function FooterSection() {
         </div>
       </div>
       <div className="mt-8 text-center text-sm text-gray-500">
-        <p>
-          &copy; {new Date().getFullYear()} Taahirah Denmark.
-        </p>
+        <p>&copy; {new Date().getFullYear()} Taahirah Denmark.</p>
       </div>
     </footer>
   );
 }
-
