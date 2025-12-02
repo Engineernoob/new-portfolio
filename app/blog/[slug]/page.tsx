@@ -10,19 +10,30 @@ const cardClass =
   "rounded-3xl border border-white/10 bg-[#0b0b0b]/80 shadow-[0_25px_80px_rgba(0,0,0,0.5)] backdrop-blur-sm";
 
 export async function generateStaticParams() {
-  const posts = getSortedPostsData();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    const posts = getSortedPostsData();
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
 }
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }> | { slug: string };
 }) {
-  const post = getPostBySlug(params.slug);
-
+  // Handle both Promise and direct params (Next.js 15+ uses Promise)
+  const resolvedParams = params instanceof Promise ? await params : params;
+  const slug = resolvedParams.slug;
+  
+  // Get the post
+  const post = getPostBySlug(slug);
+  
+  // If post not found, show not found page
   if (!post) {
     notFound();
   }

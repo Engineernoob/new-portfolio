@@ -86,7 +86,20 @@ export function getSortedPostsData(): Post[] {
  */
 export function getPostBySlug(slug: string): Post | null {
   try {
+    // Check if directory exists
+    if (!fs.existsSync(postsDirectory)) {
+      console.error(`Posts directory not found: ${postsDirectory}`);
+      return null;
+    }
+
     const fullPath = path.join(postsDirectory, `${slug}.md`);
+    
+    // Check if file exists
+    if (!fs.existsSync(fullPath)) {
+      console.error(`Post file not found: ${fullPath}`);
+      return null;
+    }
+
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const matterResult = matter(fileContents);
 
@@ -99,6 +112,7 @@ export function getPostBySlug(slug: string): Post | null {
       tags: matterResult.data.tags || [],
     } as Post;
   } catch (error) {
+    console.error(`Error reading post ${slug}:`, error);
     return null;
   }
 }
