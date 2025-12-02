@@ -19,40 +19,63 @@ const postsDirectory = path.join(process.cwd(), "posts");
  * Reads all post files, parses the frontmatter and content, and returns a sorted list.
  */
 export function getSortedPostsData(): Post[] {
-  // Get file names under /src/posts
-  const fileNames = fs.readdirSync(postsDirectory);
-
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id (slug)
-    const slug = fileName.replace(/\.md$/, "");
-
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the slug
-    return {
-      slug,
-      content: matterResult.content,
-      // Ensure all frontmatter properties exist
-      title: matterResult.data.title || "Untitled Post",
-      date: matterResult.data.date || new Date().toISOString().split("T")[0],
-      summary: matterResult.data.summary || "No summary provided.",
-      tags: matterResult.data.tags || [],
-    } as Post;
-  });
-
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
+  try {
+    // Check if directory exists
+    if (!fs.existsSync(postsDirectory)) {
+      console.error(`Posts directory not found: ${postsDirectory}`);
+      return [];
     }
-  });
+
+    // Get file names under /posts
+    const fileNames = fs.readdirSync(postsDirectory).filter((fileName) => 
+      fileName.endsWith('.md')
+    );
+
+    if (fileNames.length === 0) {
+      console.warn(`No markdown files found in ${postsDirectory}`);
+      return [];
+    }
+
+    const allPostsData = fileNames.map((fileName) => {
+      try {
+        // Remove ".md" from file name to get id (slug)
+        const slug = fileName.replace(/\.md$/, "");
+
+        // Read markdown file as string
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+
+        // Use gray-matter to parse the post metadata section
+        const matterResult = matter(fileContents);
+
+        // Combine the data with the slug
+        return {
+          slug,
+          content: matterResult.content,
+          // Ensure all frontmatter properties exist
+          title: matterResult.data.title || "Untitled Post",
+          date: matterResult.data.date || new Date().toISOString().split("T")[0],
+          summary: matterResult.data.summary || "No summary provided.",
+          tags: matterResult.data.tags || [],
+        } as Post;
+      } catch (error) {
+        console.error(`Error processing file ${fileName}:`, error);
+        return null;
+      }
+    }).filter((post): post is Post => post !== null);
+
+    // Sort posts by date
+    return allPostsData.sort((a, b) => {
+      if (a.date < b.date) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  } catch (error) {
+    console.error("Error reading posts directory:", error);
+    return [];
+  }
 }
 
 /**

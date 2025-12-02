@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSortedPostsData } from "@/lib/blog";
+import { getSortedPostsData, type Post } from "@/lib/blog";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { ArrowLeft, Calendar } from "lucide-react";
 
@@ -7,7 +7,13 @@ const cardClass =
   "rounded-3xl border border-white/10 bg-[#0b0b0b]/80 shadow-[0_25px_80px_rgba(0,0,0,0.5)] backdrop-blur-sm";
 
 export default function BlogPage() {
-  const posts = getSortedPostsData();
+  let posts: Post[] = [];
+  try {
+    posts = getSortedPostsData();
+  } catch (error) {
+    console.error("Error loading blog posts:", error);
+    posts = [];
+  }
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

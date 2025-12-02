@@ -39,11 +39,11 @@ export const PERSONAL_PROJECTS: PersonalProject[] = [
   },
   {
     id: 3,
-    title: "AI Interview Buddy",
-    description: "A real-time AI assistant for interview prep.",
-    techStack: ["React", "WebSockets", "Python", "NLP"],
-    githubLink: "https://github.com/Engineernoob/ai-interview-buddy",
-    liveLink: "https://ai-interview-buddy.vercel.app",
+    title: "Ratio",
+    description: "A microlearning + memory engine platform.",
+    techStack: ["Next.js", "Supabase", "Node.js", "React"],
+    githubLink: "https://github.com/Engineernoob/ratio",
+    liveLink: "https://ratio.vercel.app",
   },
   {
     id: 4,

@@ -2,6 +2,7 @@
 title: "From Code to Cardboard: My Experience as a UPS Seasonal Driver Helper (and What It Says About the 2025 Job Market)"
 date: "2025-12-02"
 summary: "I got a seasonal job with UPS."
+tags: []
 ---
 
 # Why I Took the Job

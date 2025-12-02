@@ -40,15 +40,14 @@ export const EXPERIENCE_DATA: JobExperience[] = [
   {
     id: 3,
     title: "Software Engineer",
-    context: "AI Interview Buddy",
+    context: "Cortex (AI Knowledge OS)",
     period: "2025",
     subTitle:
-      "Real-Time AI Assistant for Interview Prep | React | WebSockets | Python | NLP",
+      "AI Workspace & Knowledge Graph Engine | Next.js 15 | Supabase | Node.js | Embeddings",
     responsibilities: [
-      "Built **<200ms latency** NLP pipeline for live interview guidance and suggestions.",
-      "Fine-tuned LLMs for context-aware responses, improving mock interview success **25%**.",
-      "Developed React frontend with WebSocket streaming supporting **1K+ concurrent users**.",
-      "Optimized infrastructure for **99.9% uptime** during high-volume sessions.",
+      "Built **<200ms latency** embedding pipeline for semantic search and knowledge graph construction.",
+      "Developed Node.js backend for real-time context-aware responses and knowledge graph updates.",
+      "Created Next.js frontend with React and Tailwind CSS for user interface and interaction.",
     ],
   },
   {
@@ -68,6 +67,20 @@ export const EXPERIENCE_DATA: JobExperience[] = [
   },
   {
     id: 5,
+    title: "Software Engineer",
+    context: "Ratio",
+    period: "2025",
+    subTitle:
+      "Microlearning + Memory Engine Platform | Next.js 15 | Supabase | Node.js | React",
+    responsibilities: [
+      "Architected ingestion → embeddings → spaced repetition pipeline (MEMORIA).", // RAG pipeline
+      "Built OIKOS daily learning dashboard integrating lectures, micro-lessons, and reasoning drills.", // Daily learning dashboard
+      "Implemented adaptive difficulty scoring using reinforcement learning, improving user retention **30%**.", // Reinforcement learning
+      "Reduced retrieval friction **40%** via hybrid RAG + recall scheduling engine.", // Hybrid RAG + recall scheduling engine
+    ],
+  },
+  {
+    id: 6,
     title: "Operations Systems Engineer",
     context: "Glass Light Hotel",
     period: "Jul 2021 – Jun 2024",
