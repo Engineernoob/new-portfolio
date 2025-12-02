@@ -15,7 +15,7 @@ const navLinks = [
 
 const heroSocials = SOCIAL_LINKS;
 const HERO_IMAGE_URL =
-  "https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg";
+  "https://images.pexels.com/photos/2653362/pexels-photo-2653362.jpeg";
 const stackTechnologies = [
   "JavaScript",
   "TypeScript",
@@ -36,18 +36,16 @@ const stackTechnologies = [
   "Azure",
   "AWS",
   "Google Cloud",
-  "Jira",
-  "Nix OS",
 ];
 const PROFILE_IMAGE_POSITION = "50% 38%";
 
 const ABOUT_PARAGRAPHS = [
   "I'm someone who loves exploring ideas. through code, design, and whatever medium feels right that day. I spend most of my time building things that make life a bit simpler or spark curiosity, often blending structure with imagination.",
-  "Outside of work, I am a part-time artist and a full-time cinephile and audiophile. I enjoy stories in all forms, whether that's film, sound, or the small experiments that keep me inspired.",
+  "Outside of work, I like watching true crime documentaries and watching anime.",
 ];
 
 const AVAILABILITY_TEXT =
-  "Currently open to part‑time and contract roles, The kind that let me dive deep into interesting systems, build creative tools, or collaborate on experimental ideas.";
+  "Currently open to full-time roles, internships, and remote roles. The kind that let me dive deep into interesting systems, build creative tools, or collaborate on experimental ideas. I'm also open to remote roles.";
 
 const GITHUB_USERNAME = "Engineernoob";
 const GITHUB_CHART_URL = `https://ghchart.rshah.org/0aff99/${GITHUB_USERNAME}`;
@@ -127,7 +125,7 @@ function HeroBanner() {
       <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
       <div className="relative flex h-full w-full flex-col justify-center items-center p-10">
         <h1 className="text-center text-4xl md:text-5xl font-light italic leading-snug text-white">
-          Thoughts, pixels, and everything in between
+          Code, systems, and everything in between
         </h1>
       </div>
     </div>
@@ -235,8 +233,7 @@ function ContributionsSection() {
         Contributions
       </h2>
       <p className="text-base text-gray-300 mb-6 leading-relaxed">
-        I've spent the past few years moving between startups, open-source, and
-        R&D labs, where experimentation meets scale.
+        Contributions to the projects I've worked on.
       </p>
       <div className="mt-6 space-y-6 text-gray-300">
         {contributions.map((item, index) => (
@@ -247,7 +244,7 @@ function ContributionsSection() {
         ))}
         <p className="text-base leading-relaxed mt-6">
           <span className="font-semibold text-white">0→100 </span>
-          systems and ideas building what I want to see exist.
+          code, systems, and ideas building what I want to see exist.
         </p>
       </div>
     </section>
@@ -304,14 +301,14 @@ function CtaSection() {
     <section className={`${cardClass} mt-10 p-8 md:p-10`}>
       <div className="flex flex-col items-center text-center">
         <p className="text-lg text-gray-300 mb-6">
-          If you've read this far, you might be interested in what I do.
+          If you have come this far, you might be interested in what I do.
         </p>
         <a
           href="mailto:taahirah.engineer@proton.me"
           className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-8 py-4 text-base font-semibold text-white transition hover:border-[#0aff99] hover:bg-[#0aff99] hover:text-black"
         >
           <Calendar className="h-5 w-5" />
-          Book a Free Call
+          Contact me
         </a>
       </div>
     </section>

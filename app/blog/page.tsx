@@ -108,7 +108,10 @@ function NavBar() {
 
   return (
     <nav className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between py-8 text-sm text-gray-300">
-      <Link href="/" className="text-lg font-semibold text-white hover:text-[#0aff99] transition-colors">
+      <Link
+        href="/"
+        className="text-lg font-semibold text-white hover:text-[#0aff99] transition-colors"
+      >
         Taahirah
       </Link>
       <div className="flex flex-wrap items-center gap-6">
@@ -126,4 +129,3 @@ function NavBar() {
     </nav>
   );
 }
-

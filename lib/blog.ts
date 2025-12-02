@@ -27,42 +27,45 @@ export function getSortedPostsData(): Post[] {
     }
 
     // Get file names under /posts
-    const fileNames = fs.readdirSync(postsDirectory).filter((fileName) => 
-      fileName.endsWith('.md')
-    );
+    const fileNames = fs
+      .readdirSync(postsDirectory)
+      .filter((fileName) => fileName.endsWith(".md"));
 
     if (fileNames.length === 0) {
       console.warn(`No markdown files found in ${postsDirectory}`);
       return [];
     }
 
-    const allPostsData = fileNames.map((fileName) => {
-      try {
-        // Remove ".md" from file name to get id (slug)
-        const slug = fileName.replace(/\.md$/, "");
+    const allPostsData = fileNames
+      .map((fileName) => {
+        try {
+          // Remove ".md" from file name to get id (slug)
+          const slug = fileName.replace(/\.md$/, "");
 
-        // Read markdown file as string
-        const fullPath = path.join(postsDirectory, fileName);
-        const fileContents = fs.readFileSync(fullPath, "utf8");
+          // Read markdown file as string
+          const fullPath = path.join(postsDirectory, fileName);
+          const fileContents = fs.readFileSync(fullPath, "utf8");
 
-        // Use gray-matter to parse the post metadata section
-        const matterResult = matter(fileContents);
+          // Use gray-matter to parse the post metadata section
+          const matterResult = matter(fileContents);
 
-        // Combine the data with the slug
-        return {
-          slug,
-          content: matterResult.content,
-          // Ensure all frontmatter properties exist
-          title: matterResult.data.title || "Untitled Post",
-          date: matterResult.data.date || new Date().toISOString().split("T")[0],
-          summary: matterResult.data.summary || "No summary provided.",
-          tags: matterResult.data.tags || [],
-        } as Post;
-      } catch (error) {
-        console.error(`Error processing file ${fileName}:`, error);
-        return null;
-      }
-    }).filter((post): post is Post => post !== null);
+          // Combine the data with the slug
+          return {
+            slug,
+            content: matterResult.content,
+            // Ensure all frontmatter properties exist
+            title: matterResult.data.title || "Untitled Post",
+            date:
+              matterResult.data.date || new Date().toISOString().split("T")[0],
+            summary: matterResult.data.summary || "No summary provided.",
+            tags: matterResult.data.tags || [],
+          } as Post;
+        } catch (error) {
+          console.error(`Error processing file ${fileName}:`, error);
+          return null;
+        }
+      })
+      .filter((post): post is Post => post !== null);
 
     // Sort posts by date
     return allPostsData.sort((a, b) => {
