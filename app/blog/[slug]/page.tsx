@@ -180,7 +180,7 @@ function NavBar() {
   const navLinks = [
     { label: "proof-of-work", href: "/#experience" },
     { label: "blogs", href: "/blog" },
-    { label: "art", href: "/#art" },
+    { label: "case-study", href: "/#case-study" },
   ];
 
   return (

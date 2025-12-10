@@ -2,23 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Download, FileText } from "lucide-react";
+import { Calendar, Download } from "lucide-react";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { EXPERIENCE_DATA } from "./data/experience";
 import { SOCIAL_LINKS } from "./data/socials";
 import { PERSONAL_PROJECTS } from "./data/projects";
 import { SKILLS_DATA } from "./data/skills";
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { getAllCaseStudies } from "./data/case-studies";
+import { ExternalLink, Github } from "lucide-react";
 
-const accentColor = "#0aff99";
 const navLinks = [
   { label: "proof-of-work", href: "#experience" },
   { label: "projects", href: "#projects" },
   { label: "blogs", href: "/blog" },
-  { label: "art", href: "#art" },
+  { label: "case-study", href: "/case-study" },
 ];
 
 const heroSocials = SOCIAL_LINKS;
@@ -134,7 +134,10 @@ function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     if (href.startsWith("#")) {
       e.preventDefault();
       const element = document.querySelector(href);
@@ -149,11 +152,16 @@ function NavBar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`sticky top-0 z-50 flex flex-col gap-4 md:flex-row md:items-center md:justify-between py-8 text-sm text-gray-300 transition-all duration-300 ${
-        scrolled ? "bg-[#050505]/80 backdrop-blur-md border-b border-white/5" : ""
+        scrolled
+          ? "bg-[#050505]/80 backdrop-blur-md border-b border-white/5"
+          : ""
       }`}
     >
       <div className="flex items-center gap-3">
-        <Link href="/" className="text-lg font-semibold text-white hover:text-[#0aff99] transition-colors">
+        <Link
+          href="/"
+          className="text-lg font-semibold text-white hover:text-[#0aff99] transition-colors"
+        >
           Taahirah
         </Link>
       </div>
@@ -186,10 +194,10 @@ function HeroBanner() {
         className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
       <div className="relative flex h-full w-full flex-col justify-center items-center p-10">
         <h1 className="text-center text-4xl md:text-5xl font-light italic leading-snug text-white">
-          Thoughts, pixels, and everything in between
+          Code, systems, and everything in between
         </h1>
       </div>
     </div>
@@ -224,7 +232,7 @@ function ProfileCard() {
                 Taahirah Denmark
               </h2>
               <p className="mt-2 text-lg text-gray-400">
-                21 • ideas • systems • stories
+                27 • code • systems • stories
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -297,12 +305,16 @@ function ExperienceSection() {
                 <p className="text-base text-gray-300 mb-1">
                   {experience.title}
                 </p>
-                <p className="text-sm text-gray-500 mb-3">{experience.period}</p>
+                <p className="text-sm text-gray-500 mb-3">
+                  {experience.period}
+                </p>
                 {experience.responsibilities.length > 0 && (
                   <ul className="list-disc list-inside space-y-1 text-sm text-gray-400 ml-4">
-                    {experience.responsibilities.slice(0, 2).map((resp, idx) => (
-                      <li key={idx}>{stripBold(resp)}</li>
-                    ))}
+                    {experience.responsibilities
+                      .slice(0, 2)
+                      .map((resp, idx) => (
+                        <li key={idx}>{stripBold(resp)}</li>
+                      ))}
                   </ul>
                 )}
               </div>
@@ -323,7 +335,7 @@ function ProjectsSection() {
       <p className="text-base text-gray-400 mb-8">
         Personal projects and experiments I've built
       </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {PERSONAL_PROJECTS.map((project, index) => (
           <motion.div
             key={project.id}
@@ -380,6 +392,81 @@ function ProjectsSection() {
   );
 }
 
+function CaseStudySection() {
+  const caseStudies = getAllCaseStudies().slice(0, 3);
+
+  return (
+    <section id="case-study" className={`${cardClass} mt-10 p-8 md:p-10`}>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+            Case Studies
+          </h2>
+          <p className="text-base text-gray-400">
+            Deep dives into systems I've built and problems I've solved
+          </p>
+        </div>
+        <Link
+          href="/case-study"
+          className="text-sm text-gray-400 hover:text-[#0aff99] transition-colors"
+        >
+          View all →
+        </Link>
+      </div>
+      <div className="space-y-6">
+        {caseStudies.map((study, index) => (
+          <Link key={study.id} href={`/case-study/${study.slug}`}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-[#0aff99]/50 transition-all duration-300 cursor-pointer"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#0aff99]/10 border border-[#0aff99]/30 text-[#0aff99]">
+                  {study.category}
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2 hover:text-[#0aff99] transition-colors">
+                {study.title}
+              </h3>
+              <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                {study.description}
+              </p>
+              <div className="mb-4">
+                <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-2">
+                  Key Highlights
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-sm text-gray-400 ml-2">
+                  {study.highlights.slice(0, 3).map((highlight, idx) => (
+                    <li key={idx}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {study.technologies.slice(0, 5).map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="px-2 py-1 rounded text-xs font-medium bg-white/5 border border-white/10 text-gray-400"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {study.technologies.length > 5 && (
+                  <span className="px-2 py-1 rounded text-xs font-medium bg-white/5 border border-white/10 text-gray-500">
+                    +{study.technologies.length - 5}
+                  </span>
+                )}
+              </div>
+            </motion.div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ContributionsSection() {
   return (
     <section id="contributions" className={`${cardClass} mt-10 p-8 md:p-10`}>
@@ -387,7 +474,7 @@ function ContributionsSection() {
         Contributions
       </h2>
       <p className="text-base text-gray-300 mb-6 leading-relaxed">
-        I've spent the past few years moving between startups, open-source, and R&D labs, where experimentation meets scale.
+        Contributions to open source projects and communities
       </p>
       <div className="mt-6 space-y-6 text-gray-300">
         {contributions.map((item, index) => (
@@ -482,7 +569,7 @@ function CtaSection() {
           whileTap={{ scale: 0.95 }}
         >
           <Calendar className="h-5 w-5" />
-          Book a Free Call
+          Get in touch
         </motion.a>
       </div>
     </section>
@@ -494,7 +581,7 @@ function FooterSection() {
     <footer className="mt-12 border-t border-white/5 pt-8">
       <div className="mb-8">
         <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
-          Let's connect
+          Let's build something great.
         </h2>
         <p className="text-base text-gray-400 mb-6">
           Find me on these platforms

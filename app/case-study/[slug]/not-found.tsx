@@ -17,27 +17,27 @@ export default function NotFound() {
         
         <div className="mt-8 mb-8">
           <Link
-            href="/blog"
+            href="/case-study"
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to blogs
+            Back to case studies
           </Link>
         </div>
 
         <div className={cardClass + " p-8 md:p-10 text-center"}>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
-            Post Not Found
+            Case Study Not Found
           </h1>
           <p className="text-lg text-gray-400 mb-6">
-            The blog post you're looking for doesn't exist or has been removed.
+            The case study you're looking for doesn't exist or has been removed.
           </p>
           <Link
-            href="/blog"
+            href="/case-study"
             className="inline-flex items-center gap-2 text-[#0aff99] hover:text-[#0aff99]/80 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
-            View all blogs
+            View all case studies
           </Link>
         </div>
       </div>
@@ -48,8 +48,9 @@ export default function NotFound() {
 function NavBar() {
   const navLinks = [
     { label: "proof-of-work", href: "/#experience" },
+    { label: "projects", href: "/#projects" },
     { label: "blogs", href: "/blog" },
-    { label: "case-study", href: "/#case-study" },
+    { label: "case-study", href: "/case-study" },
   ];
 
   return (
