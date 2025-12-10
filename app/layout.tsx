@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Taahirah Denmark | AI Systems Engineer & Full Stack Developer",
   description:
-    "Portfolio of Taahirah Denmark, specializing in building and scaling complex AI-powered applications using Next.js, Rust, and modern ML/NLP technologies.",
+    "Portfolio of Taahirah Denmark, specializing in building and scaling complex AI-powered applications using Next.js, Rust, and modern ML/NLP technologies. Open to part-time and contract roles.",
   keywords: [
     "AI Systems Engineer",
     "Full Stack Developer",
@@ -24,16 +24,29 @@ export const metadata: Metadata = {
     "NLP",
     "TensorFlow",
     "React",
+    "TypeScript",
+    "Machine Learning",
+    "Software Engineer",
   ],
-  // Optional: Add OpenGraph/Twitter card data for social sharing
+  authors: [{ name: "Taahirah Denmark" }],
+  creator: "Taahirah Denmark",
   openGraph: {
-    title: "Taahirah Denmark | AI Systems Engineer",
-    description: "Portfolio of Taahirah Denmark.",
-    url: "YOUR_DEPLOYED_URL_HERE", // Change this to your live site URL
+    title: "Taahirah Denmark | AI Systems Engineer & Full Stack Developer",
+    description:
+      "Portfolio of Taahirah Denmark. Building AI-powered systems, full-stack applications, and creative tools.",
+    url: "https://taahirah-dev.vercel.app",
     siteName: "Taahirah Denmark Portfolio",
+    type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
+    title: "Taahirah Denmark | AI Systems Engineer",
+    description: "Portfolio of Taahirah Denmark. Building AI-powered systems and full-stack applications.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
