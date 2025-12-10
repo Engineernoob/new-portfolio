@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { getAllCaseStudies } from "@/app/data/case-studies";
+import { getAllCaseStudies } from "../data/case-studies";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { ArrowLeft, Calendar, ExternalLink, Code } from "lucide-react";
 import { motion } from "framer-motion";
@@ -45,10 +45,10 @@ export default function CaseStudyPage() {
             <ArrowLeft className="h-4 w-4" />
             Back to home
           </Link>
-          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Case Studies
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-xl md:text-2xl text-gray-300 font-medium">
             Deep dives into systems I've built and problems I've solved
           </p>
         </motion.div>
@@ -77,20 +77,20 @@ export default function CaseStudyPage() {
                         {study.date}
                       </div>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3 hover:text-[#0aff99] transition-colors">
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 hover:text-[#0aff99] transition-colors">
                       {study.title}
                     </h2>
-                    <p className="text-base text-gray-300 leading-relaxed mb-4">
+                    <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-4 font-medium">
                       {study.description}
                     </p>
                   </div>
                 </div>
                 
                 <div className="mb-4">
-                  <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-2">
+                  <p className="text-sm uppercase tracking-[0.4em] text-gray-400 mb-3 font-semibold">
                     Key Highlights
                   </p>
-                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-400 ml-2">
+                  <ul className="list-disc list-inside space-y-2 text-base text-gray-300 ml-2 font-medium">
                     {study.highlights.slice(0, 3).map((highlight, idx) => (
                       <li key={idx}>{highlight}</li>
                     ))}

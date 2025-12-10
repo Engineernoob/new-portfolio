@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Download } from "lucide-react";
+import { Calendar, Download, Menu, X } from "lucide-react";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { EXPERIENCE_DATA } from "./data/experience";
 import { SOCIAL_LINKS } from "./data/socials";
@@ -48,12 +49,12 @@ const stackTechnologies = [
 const PROFILE_IMAGE_POSITION = "50% 38%";
 
 const ABOUT_PARAGRAPHS = [
-  "I'm someone who loves exploring ideas through code, design, and whatever medium feels right that day. I spend most of my time building things that make life a bit simpler or spark curiosity, often blending structure with imagination.",
-  "Outside of work, I'm a part-time artist and a full-time cinephile and audiophile. I enjoy stories in all forms, whether that's film, sound, or the small experiments that keep me inspired.",
+  "I'm a software engineer with a passion for building tools that make life a bit simpler or spark curiosity. I spend most of my time building things that make life a bit simpler or spark curiosity, often blending structure with imagination.",
+  "Outside of work and school, I enjoy reading, writing, and exploring new technologies, watching True Crime documentaries and listening to audiobooks or watching anime.",
 ];
 
 const AVAILABILITY_TEXT =
-  "Currently open to part‑time and contract roles. The kind that let me dive deep into interesting systems, build creative tools, or collaborate on experimental ideas.";
+  "Currently open to full-time roles. The kind that let me dive deep into interesting systems, build creative tools, or collaborate on experimental ideas.";
 
 const GITHUB_USERNAME = "Engineernoob";
 const GITHUB_CHART_URL = `https://ghchart.rshah.org/0aff99/${GITHUB_USERNAME}`;
@@ -125,14 +126,49 @@ export default function Home() {
 
 function NavBar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Scroll spy for active section detection
+      const sections = navLinks
+        .filter(link => link.href.startsWith("#"))
+        .map(link => {
+          const id = link.href.substring(1);
+          const element = document.getElementById(id);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            return { id, top: rect.top, bottom: rect.bottom };
+          }
+          return null;
+        })
+        .filter(Boolean) as Array<{ id: string; top: number; bottom: number }>;
+
+      const currentSection = sections.find(
+        (section) => section.top <= 100 && section.bottom >= 100
+      );
+      
+      if (currentSection) {
+        setActiveSection(`#${currentSection.id}`);
+      } else if (window.scrollY < 100) {
+        setActiveSection("");
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check on mount
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -145,40 +181,121 @@ function NavBar() {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
+    setMobileMenuOpen(false); // Close mobile menu on click
+  };
+
+  const isActive = (href: string) => {
+    if (pathname !== "/") return pathname === href;
+    return activeSection === href || (href === "#experience" && activeSection === "");
   };
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`sticky top-0 z-50 flex flex-col gap-4 md:flex-row md:items-center md:justify-between py-8 text-sm text-gray-300 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#050505]/80 backdrop-blur-md border-b border-white/5"
-          : ""
+          ? "bg-[#050505]/90 backdrop-blur-md border-b border-white/5 shadow-lg"
+          : "bg-transparent"
       }`}
     >
-      <div className="flex items-center gap-3">
-        <Link
-          href="/"
-          className="text-lg font-semibold text-white hover:text-[#0aff99] transition-colors"
-        >
-          Taahirah
-        </Link>
-      </div>
-      <div className="flex flex-wrap items-center gap-6">
-        {navLinks.map((item) => (
+      <div className="mx-auto max-w-4xl px-4 sm:px-8">
+        <div className="flex items-center justify-between py-4 md:py-6">
+          {/* Logo */}
           <Link
-            key={item.label}
-            href={item.href}
-            onClick={(e) => handleNavClick(e, item.href)}
-            className="hover:text-white transition-colors duration-200 relative group"
-            aria-label={item.label}
+            href="/"
+            className="text-lg font-semibold text-white hover:text-[#0aff99] transition-colors relative z-10"
           >
-            {item.label}
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#0aff99] group-hover:w-full transition-all duration-300" />
+            Taahirah
           </Link>
-        ))}
-        <ThemeSwitcher />
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`relative text-sm transition-colors duration-200 ${
+                    active
+                      ? "text-[#0aff99] font-medium"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                  aria-label={item.label}
+                >
+                  {item.label}
+                  {active && (
+                    <motion.span
+                      layoutId="activeNav"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#0aff99]"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                  {!active && (
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0aff99] group-hover:w-full transition-all duration-300" />
+                  )}
+                </Link>
+              );
+            })}
+            <div className="ml-2">
+              <ThemeSwitcher />
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex items-center gap-4 md:hidden">
+            <ThemeSwitcher />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-gray-300 hover:text-white transition-colors"
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="py-4 space-y-4 border-t border-white/5">
+                {navLinks.map((item) => {
+                  const active = isActive(item.href);
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className={`block py-2 text-sm transition-colors duration-200 ${
+                        active
+                          ? "text-[#0aff99] font-medium"
+                          : "text-gray-300 hover:text-white"
+                      }`}
+                      aria-label={item.label}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
@@ -196,7 +313,7 @@ function HeroBanner() {
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
       <div className="relative flex h-full w-full flex-col justify-center items-center p-10">
-        <h1 className="text-center text-4xl md:text-5xl font-light italic leading-snug text-white">
+        <h1 className="text-center text-4xl md:text-6xl font-medium italic leading-snug text-white">
           Code, systems, and everything in between
         </h1>
       </div>
@@ -227,11 +344,11 @@ function ProfileCard() {
             <div>
               <h2
                 id="profile-heading"
-                className="text-4xl md:text-5xl font-semibold text-white"
+                className="text-4xl md:text-5xl font-bold text-white"
               >
                 Taahirah Denmark
               </h2>
-              <p className="mt-2 text-lg text-gray-400">
+              <p className="mt-3 text-xl md:text-2xl text-gray-300 font-medium">
                 27 • code • systems • stories
               </p>
             </div>
@@ -267,11 +384,11 @@ function ProfileCard() {
             </div>
           </div>
         </div>
-        <div className="mt-6 space-y-4 text-base leading-relaxed text-gray-300">
+        <div className="mt-6 space-y-5 text-lg md:text-xl leading-relaxed text-gray-200">
           {ABOUT_PARAGRAPHS.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
+            <p key={index} className="font-medium">{paragraph}</p>
           ))}
-          <p className="text-gray-400 italic">{AVAILABILITY_TEXT}</p>
+          <p className="text-gray-300 italic text-base md:text-lg">{AVAILABILITY_TEXT}</p>
         </div>
       </div>
     </section>
@@ -280,8 +397,8 @@ function ProfileCard() {
 
 function ExperienceSection() {
   return (
-    <section id="experience" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-8">
+    <section id="experience" className={`${cardClass} mt-10 p-8 md:p-10 scroll-mt-20`}>
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
         Professional Experience
       </h2>
       <div className="mt-8 space-y-8">
@@ -299,17 +416,17 @@ function ExperienceSection() {
                 {getInitials(experience.context)}
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-white mb-1">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
                   {experience.context}
                 </h3>
-                <p className="text-base text-gray-300 mb-1">
+                <p className="text-lg md:text-xl font-semibold text-gray-200 mb-2">
                   {experience.title}
                 </p>
-                <p className="text-sm text-gray-500 mb-3">
+                <p className="text-base text-gray-400 mb-4 font-medium">
                   {experience.period}
                 </p>
                 {experience.responsibilities.length > 0 && (
-                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-400 ml-4">
+                  <ul className="list-disc list-inside space-y-3 text-lg md:text-xl text-gray-200 ml-4 font-medium leading-relaxed">
                     {experience.responsibilities
                       .slice(0, 2)
                       .map((resp, idx) => (
@@ -328,11 +445,11 @@ function ExperienceSection() {
 
 function ProjectsSection() {
   return (
-    <section id="projects" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+    <section id="projects" className={`${cardClass} mt-10 p-8 md:p-10 scroll-mt-20`}>
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
         Projects
       </h2>
-      <p className="text-base text-gray-400 mb-8">
+      <p className="text-lg md:text-xl text-gray-300 mb-8 font-medium">
         Personal projects and experiments I've built
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -345,8 +462,8 @@ function ProjectsSection() {
             transition={{ delay: index * 0.1 }}
             className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-[#0aff99]/50 transition-all duration-300"
           >
-            <div className="flex items-start justify-between mb-3">
-              <h3 className="text-xl font-semibold text-white">
+            <div className="flex items-start justify-between mb-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
                 {project.title}
               </h3>
               <div className="flex gap-2">
@@ -372,7 +489,7 @@ function ProjectsSection() {
                 )}
               </div>
             </div>
-            <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-200 mb-4 leading-relaxed font-medium">
               {project.description}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -396,19 +513,19 @@ function CaseStudySection() {
   const caseStudies = getAllCaseStudies().slice(0, 3);
 
   return (
-    <section id="case-study" className={`${cardClass} mt-10 p-8 md:p-10`}>
+    <section id="case-study" className={`${cardClass} mt-10 p-8 md:p-10 scroll-mt-20`}>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
             Case Studies
           </h2>
-          <p className="text-base text-gray-400">
+          <p className="text-lg md:text-xl text-gray-300 font-medium">
             Deep dives into systems I've built and problems I've solved
           </p>
         </div>
         <Link
           href="/case-study"
-          className="text-sm text-gray-400 hover:text-[#0aff99] transition-colors"
+          className="text-base md:text-lg text-gray-300 hover:text-[#0aff99] transition-colors font-medium"
         >
           View all →
         </Link>
@@ -428,21 +545,21 @@ function CaseStudySection() {
                   {study.category}
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2 hover:text-[#0aff99] transition-colors">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 hover:text-[#0aff99] transition-colors">
                 {study.title}
               </h3>
-              <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-200 mb-4 leading-relaxed font-medium">
                 {study.description}
               </p>
               <div className="mb-4">
                 <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-2">
                   Key Highlights
                 </p>
-                <ul className="list-disc list-inside space-y-1 text-sm text-gray-400 ml-2">
-                  {study.highlights.slice(0, 3).map((highlight, idx) => (
-                    <li key={idx}>{highlight}</li>
-                  ))}
-                </ul>
+              <ul className="list-disc list-inside space-y-2 text-base text-gray-300 ml-2 font-medium">
+                {study.highlights.slice(0, 3).map((highlight, idx) => (
+                  <li key={idx}>{highlight}</li>
+                ))}
+              </ul>
               </div>
               <div className="flex flex-wrap gap-2">
                 {study.technologies.slice(0, 5).map((tech, idx) => (
@@ -470,21 +587,21 @@ function CaseStudySection() {
 function ContributionsSection() {
   return (
     <section id="contributions" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
         Contributions
       </h2>
-      <p className="text-base text-gray-300 mb-6 leading-relaxed">
+      <p className="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed font-medium">
         Contributions to open source projects and communities
       </p>
-      <div className="mt-6 space-y-6 text-gray-300">
+      <div className="mt-6 space-y-6 text-gray-200">
         {contributions.map((item, index) => (
-          <p key={index} className="text-base leading-relaxed">
-            <span className="font-semibold text-white">{item.title} </span>
+          <p key={index} className="text-lg md:text-xl leading-relaxed">
+            <span className="font-bold text-white">{item.title} </span>
             {item.body}
           </p>
         ))}
-        <p className="text-base leading-relaxed mt-6">
-          <span className="font-semibold text-white">0→100 </span>
+        <p className="text-lg md:text-xl leading-relaxed mt-8 font-medium">
+          <span className="font-bold text-white">0→100 </span>
           systems and ideas building what I want to see exist.
         </p>
       </div>
@@ -495,7 +612,7 @@ function ContributionsSection() {
 function GitHubSection() {
   return (
     <section id="github" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
         GitHub Contributions • @{GITHUB_USERNAME}
       </h2>
       <div className="mt-6 rounded-2xl border border-white/5 bg-black/40 p-6">
@@ -517,10 +634,10 @@ function GitHubSection() {
 function StackSection() {
   return (
     <section id="stack" className={`${cardClass} mt-10 p-8 md:p-10`}>
-      <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
         Stack I use
       </h2>
-      <p className="text-base text-gray-400 mb-8">
+      <p className="text-lg md:text-xl text-gray-300 mb-8 font-medium">
         Technologies I work with to build products that solve real problems
       </p>
       <div className="mt-8 flex flex-wrap gap-4">
@@ -532,7 +649,7 @@ function StackSection() {
             viewport={{ once: true }}
             transition={{ delay: index * 0.05 }}
             whileHover={{ scale: 1.05, borderColor: "#0aff99" }}
-            className="flex h-20 min-w-[120px] flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 text-sm font-semibold text-gray-100 hover:border-[#0aff99] transition-colors cursor-default"
+            className="flex h-20 min-w-[120px] flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 text-base md:text-lg font-bold text-gray-100 hover:border-[#0aff99] transition-colors cursor-default"
           >
             {tech}
           </motion.div>
@@ -544,10 +661,10 @@ function StackSection() {
             key={category.category}
             className="rounded-2xl border border-white/5 bg-black/20 p-4"
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-2">
+            <p className="text-sm uppercase tracking-[0.4em] text-gray-400 mb-3 font-semibold">
               {category.category}
             </p>
-            <p className="text-sm text-gray-300">{category.skills}</p>
+            <p className="text-base md:text-lg text-gray-200 font-medium leading-relaxed">{category.skills}</p>
           </div>
         ))}
       </div>
@@ -559,12 +676,12 @@ function CtaSection() {
   return (
     <section className={`${cardClass} mt-10 p-8 md:p-10`}>
       <div className="flex flex-col items-center text-center">
-        <p className="text-lg text-gray-300 mb-6">
+        <p className="text-xl md:text-2xl text-gray-200 mb-8 font-medium leading-relaxed">
           If you've read this far, you might be interested in what I do.
         </p>
         <motion.a
           href="mailto:taahirah.engineer@proton.me"
-          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-8 py-4 text-base font-semibold text-white transition hover:border-[#0aff99] hover:bg-[#0aff99] hover:text-black"
+          className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 px-10 py-5 text-lg md:text-xl font-bold text-white transition hover:border-[#0aff99] hover:bg-[#0aff99] hover:text-black"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -580,10 +697,10 @@ function FooterSection() {
   return (
     <footer className="mt-12 border-t border-white/5 pt-8">
       <div className="mb-8">
-        <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
           Let's build something great.
         </h2>
-        <p className="text-base text-gray-400 mb-6">
+        <p className="text-lg md:text-xl text-gray-300 mb-8 font-medium">
           Find me on these platforms
         </p>
         <div className="flex flex-wrap gap-4">
@@ -595,7 +712,7 @@ function FooterSection() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 transition hover:border-[#0aff99] hover:text-white"
+                className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-5 py-3 text-base md:text-lg font-medium text-gray-200 transition hover:border-[#0aff99] hover:text-white"
               >
                 <Icon className="h-4 w-4" />
                 <span>{link.name}</span>
@@ -604,8 +721,8 @@ function FooterSection() {
           })}
         </div>
       </div>
-      <div className="mt-8 text-center text-sm text-gray-500">
-        <p>&copy; {new Date().getFullYear()} Taahirah Denmark.</p>
+      <div className="mt-8 text-center text-base text-gray-400">
+        <p className="font-medium">&copy; {new Date().getFullYear()} Taahirah Denmark.</p>
       </div>
     </footer>
   );

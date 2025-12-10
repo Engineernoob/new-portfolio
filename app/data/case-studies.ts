@@ -137,6 +137,44 @@ export const CASE_STUDIES: CaseStudy[] = [
     date: "2025-03",
     category: "Knowledge Management",
   },
+  {
+    id: 4,
+    slug: "prompt-diff",
+    title: "Prompt Diff - Behavioral Analyzer for LLM Prompts",
+    description:
+      "A tool that compares two prompts and generates behavioral reports showing cost, risk, constraint strength, and reliability changes — not just text diffs.",
+    fullDescription:
+      "Prompt Diff answers a critical question in prompt engineering: 'If I change this line, what does it actually do to the model's behavior?' Most tools only show text diffs, but Prompt Diff shows behavioral diffs — the things that matter in production. It compares two prompts and generates a comprehensive behavioral report including token deltas, constraint analysis, role clarity detection, uncertainty signal analysis, and a risk score with explicit reasoning.",
+    technologies: ["FastAPI", "Jinja2", "Python"],
+    highlights: [
+      "Token delta analysis for cost and latency changes",
+      "Constraint analysis detecting missing or excessive rules",
+      "Role clarity detection to reduce behavioral drift",
+      "Uncertainty signal analysis for confidence shaping",
+      "Risk Score (0-10) with Low/Moderate/High bands",
+      "Transparent heuristics — no black-box AI evaluation",
+      "Minimal, production-focused UI design",
+    ],
+    challenges: [
+      "Small prompt edits can create big problems: higher token costs, overly rigid behavior, overconfident hallucinations, and under-specified instructions",
+      "No existing tool made behavioral changes obvious to developers",
+      "Need for explainable analysis without relying on black-box ML models",
+    ],
+    solutions: [
+      "Built heuristic scoring model based on real prompt failure modes",
+      "Used regex-based detection for constraints, roles, and uncertainty signals",
+      "Designed transparent logic with explicit reasoning — no claims of 'AI evaluation'",
+      "Created minimal two-column layout with clean dark UI for fast, interpretable results",
+    ],
+    results: [
+      "Provides actionable feedback developers actually use in production",
+      "Reduces risk by making prompt changes transparent before deployment",
+      "Fast and interpretable — no unnecessary complexity",
+      "Clear diagnostics that help prevent costly prompt drift",
+    ],
+    date: "2025-12",
+    category: "AI Tools",
+  },
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {

@@ -40,10 +40,10 @@ export default function BlogPage() {
             <ArrowLeft className="h-4 w-4" />
             Back to home
           </Link>
-          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Blogs
           </h1>
-          <p className="text-lg text-gray-400">
+          <p className="text-xl md:text-2xl text-gray-300 font-medium">
             Thoughts, ideas, and everything in between
           </p>
         </div>
@@ -64,15 +64,15 @@ export default function BlogPage() {
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="flex-1">
-                    <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3 hover:text-[#0aff99] transition-colors">
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 hover:text-[#0aff99] transition-colors">
                       {post.title}
                     </h2>
-                    <p className="text-base text-gray-300 leading-relaxed mb-4">
+                    <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-4 font-medium">
                       {post.summary}
                     </p>
                     <div className="flex items-center gap-4 flex-wrap">
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <Calendar className="h-4 w-4" />
+                      <div className="flex items-center gap-2 text-base text-gray-400 font-medium">
+                        <Calendar className="h-5 w-5" />
                         {formatDate(post.date)}
                       </div>
                       {post.tags.length > 0 && (

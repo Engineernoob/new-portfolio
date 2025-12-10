@@ -68,12 +68,12 @@ export default async function BlogPostPage({
 
         <article className={cardClass + " p-8 md:p-10"}>
           <header className="mb-8">
-            <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               {post.title}
             </h1>
-            <div className="flex items-center gap-4 flex-wrap mb-4">
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <Calendar className="h-4 w-4" />
+            <div className="flex items-center gap-4 flex-wrap mb-6">
+              <div className="flex items-center gap-2 text-base text-gray-400 font-medium">
+                <Calendar className="h-5 w-5" />
                 {formatDate(post.date)}
               </div>
               {post.tags.length > 0 && (
@@ -90,7 +90,7 @@ export default async function BlogPostPage({
               )}
             </div>
             {post.summary && (
-              <p className="text-lg text-gray-300 leading-relaxed italic">
+              <p className="text-xl md:text-2xl text-gray-200 leading-relaxed italic font-medium">
                 {post.summary}
               </p>
             )}
@@ -101,25 +101,25 @@ export default async function BlogPostPage({
               remarkPlugins={[remarkGfm]}
               components={{
                 h1: ({ node, ...props }) => (
-                  <h1 className="text-3xl font-semibold text-white mt-8 mb-4" {...props} />
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mt-10 mb-6" {...props} />
                 ),
                 h2: ({ node, ...props }) => (
-                  <h2 className="text-2xl font-semibold text-white mt-6 mb-3" {...props} />
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4" {...props} />
                 ),
                 h3: ({ node, ...props }) => (
-                  <h3 className="text-xl font-semibold text-white mt-5 mb-2" {...props} />
+                  <h3 className="text-xl md:text-2xl font-bold text-white mt-6 mb-3" {...props} />
                 ),
                 p: ({ node, ...props }) => (
-                  <p className="text-base text-gray-300 leading-relaxed mb-4" {...props} />
+                  <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-6 font-medium" {...props} />
                 ),
                 ul: ({ node, ...props }) => (
-                  <ul className="list-disc list-inside text-gray-300 mb-4 space-y-2" {...props} />
+                  <ul className="list-disc list-inside text-gray-200 mb-6 space-y-3 ml-4" {...props} />
                 ),
                 ol: ({ node, ...props }) => (
-                  <ol className="list-decimal list-inside text-gray-300 mb-4 space-y-2" {...props} />
+                  <ol className="list-decimal list-inside text-gray-200 mb-6 space-y-3 ml-4" {...props} />
                 ),
                 li: ({ node, ...props }) => (
-                  <li className="text-base text-gray-300" {...props} />
+                  <li className="text-lg md:text-xl text-gray-200 font-medium leading-relaxed" {...props} />
                 ),
                 code: ({ node, className, ...props }: any) => {
                   const isInline = !className;

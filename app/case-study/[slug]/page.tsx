@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCaseStudyBySlug, getAllCaseStudies } from "@/app/data/case-studies";
+import { getCaseStudyBySlug, getAllCaseStudies } from "../../data/case-studies";
 import { ThemeSwitcher } from "../../components/ThemeSwitcher";
 import { ArrowLeft, Calendar, Code, CheckCircle, Lightbulb, TrendingUp } from "lucide-react";
 
@@ -56,10 +56,10 @@ export default async function CaseStudyDetailPage({
                 {study.date}
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               {study.title}
             </h1>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-medium">
               {study.fullDescription}
             </p>
           </header>
@@ -67,13 +67,13 @@ export default async function CaseStudyDetailPage({
           <div className="space-y-8">
             {/* Key Highlights */}
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-2">
                 <CheckCircle className="h-6 w-6 text-[#0aff99]" />
                 Key Highlights
               </h2>
-              <ul className="list-disc list-inside space-y-2 text-base text-gray-300 ml-2">
+              <ul className="list-disc list-inside space-y-3 text-lg md:text-xl text-gray-200 ml-4 font-medium">
                 {study.highlights.map((highlight, idx) => (
-                  <li key={idx}>{highlight}</li>
+                  <li key={idx} className="leading-relaxed">{highlight}</li>
                 ))}
               </ul>
             </section>
@@ -82,24 +82,24 @@ export default async function CaseStudyDetailPage({
             {study.challenges && study.solutions && (
               <>
                 <section>
-                  <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-2">
                     <Lightbulb className="h-6 w-6 text-[#0aff99]" />
                     Challenges & Solutions
                   </h2>
-                  <div className="space-y-6">
+                  <div className="space-y-8">
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-3">Challenges</h3>
-                      <ul className="list-disc list-inside space-y-2 text-base text-gray-300 ml-2">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Challenges</h3>
+                      <ul className="list-disc list-inside space-y-3 text-lg md:text-xl text-gray-200 ml-4 font-medium">
                         {study.challenges.map((challenge, idx) => (
-                          <li key={idx}>{challenge}</li>
+                          <li key={idx} className="leading-relaxed">{challenge}</li>
                         ))}
                       </ul>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-3">Solutions</h3>
-                      <ul className="list-disc list-inside space-y-2 text-base text-gray-300 ml-2">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Solutions</h3>
+                      <ul className="list-disc list-inside space-y-3 text-lg md:text-xl text-gray-200 ml-4 font-medium">
                         {study.solutions.map((solution, idx) => (
-                          <li key={idx}>{solution}</li>
+                          <li key={idx} className="leading-relaxed">{solution}</li>
                         ))}
                       </ul>
                     </div>
@@ -111,13 +111,13 @@ export default async function CaseStudyDetailPage({
             {/* Results */}
             {study.results && (
               <section>
-                <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-2">
                   <TrendingUp className="h-6 w-6 text-[#0aff99]" />
                   Results
                 </h2>
-                <ul className="list-disc list-inside space-y-2 text-base text-gray-300 ml-2">
+                <ul className="list-disc list-inside space-y-3 text-lg md:text-xl text-gray-200 ml-4 font-medium">
                   {study.results.map((result, idx) => (
-                    <li key={idx}>{result}</li>
+                    <li key={idx} className="leading-relaxed">{result}</li>
                   ))}
                 </ul>
               </section>
@@ -125,15 +125,15 @@ export default async function CaseStudyDetailPage({
 
             {/* Technologies */}
             <section>
-              <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-2">
                 <Code className="h-6 w-6 text-[#0aff99]" />
                 Technologies
               </h2>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {study.technologies.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 rounded-lg text-sm font-medium bg-white/5 border border-white/10 text-gray-300"
+                    className="px-4 py-2 rounded-lg text-base md:text-lg font-semibold bg-white/5 border border-white/10 text-gray-200"
                   >
                     {tech}
                   </span>
