@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // 1. Import the font
 import "./globals.css";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/next";
 
 // 2. Define the font object
 const inter = Inter({
@@ -42,7 +43,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Taahirah Denmark | AI Systems Engineer",
-    description: "Portfolio of Taahirah Denmark. Building AI-powered systems and full-stack applications.",
+    description:
+      "Portfolio of Taahirah Denmark. Building AI-powered systems and full-stack applications.",
   },
   robots: {
     index: true,
@@ -70,6 +72,7 @@ export default function RootLayout({
             {children}
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
