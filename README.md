@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Taahirah Denmark — Portfolio
 
-## Getting Started
+Production-focused software engineer building full-stack systems, AI-driven tools, and backend infrastructure.
 
-First, run the development server:
+🌐 Live Site: https://taahirah-dev.vercel.app
 
-```bash
+📦 GitHub: https://github.com/Engineernoob
+
+🚀 Live API: https://opshub-api.onrender.com
+
+About
+
+This portfolio showcases production-style applications including:
+
+Full-stack web applications (Next.js + TypeScript)
+
+AI-powered systems and LLM orchestration
+
+Backend REST APIs with authentication and RBAC
+
+Prisma + PostgreSQL data modeling
+
+Dockerized development environments
+
+CI/CD pipelines via GitHub Actions
+
+Featured Projects
+🧠 OpsHub API
+
+Production-ready TypeScript REST API with JWT authentication, role-based access control, Prisma ORM, and Postgres.
+
+Live: https://opshub-api.onrender.com
+
+Docs: https://opshub-api.onrender.com/docs
+
+Stack: Node.js, TypeScript, Express, Prisma, PostgreSQL, Docker, GitHub Actions
+
+🤖 Adaptive Job Neural Network (AJNN)
+
+AI-powered job matching platform leveraging TensorFlow and real-time recommendation pipelines.
+
+Stack: Python, TensorFlow, Node.js, Firebase
+
+📚 Ratio
+
+Microlearning + memory engine with embeddings and adaptive recall logic.
+
+Stack: Next.js, Supabase, Node.js
+
+Tech Stack
+
+Frontend
+
+React
+
+Next.js
+
+TypeScript
+
+Tailwind CSS
+
+Backend
+
+Node.js
+
+Express
+
+Prisma
+
+PostgreSQL
+
+JWT Auth
+
+AI / ML
+
+TensorFlow
+
+PyTorch
+
+NLP
+
+Reinforcement Learning
+
+Infrastructure
+
+Docker
+
+Render
+
+Vercel
+
+GitHub Actions
+
+Local Development
+git clone https://github.com/Engineernoob/new-portfolio
+cd new-portfolio
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
+Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This portfolio is deployed on Vercel.
+The backend API is deployed on Render.
 
-## Learn More
+Philosophy
 
-To learn more about Next.js, take a look at the following resources:
+I build systems that are:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Structured
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Observable
 
-## Deploy on Vercel
+Production-ready
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Typed strictly
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Designed for scale
+
+Not demos. Not tutorials. Systems.
