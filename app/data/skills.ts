@@ -3,24 +3,29 @@ export interface SkillCategory {
   skills: string;
 }
 
-// Data extracted from the Technical Skills section of the resume
 export const SKILLS_DATA: SkillCategory[] = [
   {
-    category: "Front End",
-    skills:
-      "React, NextJS, Javascript, TypeScript, NodeJS, CSS, HTML, ShadCN, Bootstrap",
+    category: "Core",
+    skills: "TypeScript, JavaScript, Python, SQL",
   },
   {
-    category: "Back End",
-    skills: "Node.js, Express.js, Rust, Go, Ruby, Flask, Python",
+    category: "Frontend",
+    skills: "React, Next.js, Tailwind CSS, HTML, CSS, shadcn/ui",
   },
   {
-    category: "AI/ML",
-    skills:
-      "TensorFlow, PyTorch, Keras, Scikit-learn, Natural Language Processing (NLP), Hugging Face Transformers, Generative AI, Reinforcement Learning, Advanced Algorithms & Optimization",
+    category: "Backend",
+    skills: "Node.js, Express, FastAPI, REST APIs, Auth (JWT/session), Webhooks",
   },
   {
-    category: "Cloud & Infrastructure",
-    skills: "Docker, Kubernetes, Qdrant, Supabase, Graphviz, GitHub Actions",
+    category: "Data",
+    skills: "PostgreSQL, MongoDB, Redis, Supabase",
+  },
+  {
+    category: "AI Tooling",
+    skills: "Embeddings, Semantic Search, Prompt Evaluation, TensorFlow (basic), Hugging Face (basic)",
+  },
+  {
+    category: "Infra",
+    skills: "Docker, Git, GitHub Actions, CI/CD",
   },
 ];

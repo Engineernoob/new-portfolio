@@ -1,95 +1,69 @@
 export interface JobExperience {
   id: number;
   title: string;
-  context: string; // The role/company line in the resume (e.g., Startup Company | Next.js)
+  context: string; // Company / org
   period: string;
-  subTitle: string; // The supporting context line (e.g., AI-Powered Career Matching Platform)
+  subTitle: string; // Stack or scope
   responsibilities: string[];
 }
 
-// Data extracted from the Taahirah Denmark resume
 export const EXPERIENCE_DATA: JobExperience[] = [
   {
     id: 1,
     title: "Software Engineer Intern",
     context: "Series",
-    period: "Sep 2024 – Mar 2025",
-    subTitle:
-      "Software Engineer Intern | Startup Company | Full-Stack Development | Next.js | Node.js | PostgreSQL | TypeScript",
+    period: "July 2024 – July 2025",
+    subTitle: "Full Stack • Next.js • Node.js • PostgreSQL • TypeScript",
     responsibilities: [
-      "Increased user engagement **30%** by implementing AI-powered NLP recommendations for 1,500+ active users.",
-      "Scaled Node.js/Python backend to handle **10K+ daily API calls** with <200ms latency.",
-      "Reduced Firebase query response times **20%**, improving real-time data reliability.",
-      "Authored documentation that cut new engineer onboarding time **50%**.",
+      "Increased user engagement **30%** by shipping AI-powered NLP recommendations for **1,500+** active users.",
+      "Scaled Node.js/Python backend to handle **10K+ daily API calls** with **<200ms** latency.",
+      "Reduced Firebase query response times **20%** by optimizing access patterns and caching hot reads.",
+      "Authored onboarding + runbook documentation that cut new engineer ramp time **50%**.",
     ],
   },
   {
     id: 2,
-    title: "Software Engineer",
-    context: "Adaptive Job Neural Network (AJNN)",
-    period: "2025",
+    title: "Information Technology Trainee",
+    context: "Year Up – National Capital Region",
+    period: "Mar 2016 – Mar 2017",
     subTitle:
-      "AI-Powered Career Matching Platform | Python | TensorFlow | Node.js | Firebase",
+      "IT Fundamentals • Business Operations • Professional Development",
     responsibilities: [
-      "Delivered **92% accurate** job matching across **20K+ profiles**, improving candidate-role fit.",
-      "Built real-time Node.js + Firebase recommendation pipeline serving **5K+ users** with <300ms latency.",
-      "Integrated explainable AI features, raising user trust and satisfaction **35%**.",
-      "Reduced model training time **40%** using GPU acceleration and optimized batch processing.",
+      "Completed an intensive one-year IT training program combining technical coursework with corporate internship preparation.",
+      "Focused on desktop support, software development fundamentals, and business operations workflows.",
+      "Earned 22–28 transferable college credits through ACE CREDIT.",
+      "Completed coursework in computer applications, business writing, public speaking, and career development.",
     ],
   },
   {
     id: 3,
-    title: "Software Engineer",
-    context: "Cortex (AI Knowledge OS)",
-    period: "2025",
+    title: "Breakfast Cook",
+    context: "Glass Light Hotel",
+    period: "Jul 2021 – Jun 2024",
     subTitle:
-      "AI Workspace & Knowledge Graph Engine | Next.js 15 | Supabase | Node.js | Embeddings",
+      "High-Volume Service • Process Optimization • Guest-Facing Operations",
     responsibilities: [
-      "Built **<200ms latency** embedding pipeline for semantic search and knowledge graph construction.",
-      "Developed Node.js backend for real-time context-aware responses and knowledge graph updates.",
-      "Created Next.js frontend with React and Tailwind CSS for user interface and interaction.",
+      "Managed high-volume breakfast service in an open-kitchen environment, maintaining speed and quality under peak demand.",
+      "Reduced service delays by standardizing prep workflows and optimizing station organization.",
+      "Handled direct guest interaction daily, resolving issues in real-time and maintaining high satisfaction scores.",
+      "Maintained strict food safety and compliance standards with consistent execution across 4 years.",
     ],
   },
   {
     id: 4,
-    title: "AI Systems Engineer",
-    context: "Ada",
-    period: "Jan 2025 – Jun 2025",
+    title:
+      "Culinary Operations (Garde Manger, Sauté Chef, Pastry Prep, Line Cook)",
+    context: "Harbor's Edge • Bonchon • Island View Casino • Fatsumo Sushi",
+    period: "2019 – 2024",
     subTitle:
-      "Personal AI Assistant & Local LLM Orchestrator | Rust | Python | Whisper.cpp | Ollama | Tauri | TypeScript",
+      "High-Volume Production • Inventory Control • Process Discipline • Guest-Facing Service",
     responsibilities: [
-      "Engineered a cross-platform desktop assistant integrating **local LLM inference**, **speech recognition**, and **context memory**.",
-      "Designed offline-first voice pipeline using Whisper.cpp for transcription and Ollama for model reasoning.",
-      "Implemented **Rust-based orchestrator** to route async system commands via local APIs.",
-      "Built **Tauri desktop interface** with real-time context recall and keyboard automation.",
-      "Developed Ada CLI for terminal-based agent control, enabling local automation without cloud APIs.",
-    ],
-  },
-  {
-    id: 5,
-    title: "Software Engineer",
-    context: "Ratio",
-    period: "2025",
-    subTitle:
-      "Microlearning + Memory Engine Platform | Next.js 15 | Supabase | Node.js | React",
-    responsibilities: [
-      "Architected ingestion → embeddings → spaced repetition pipeline (MEMORIA).", // RAG pipeline
-      "Built OIKOS daily learning dashboard integrating lectures, micro-lessons, and reasoning drills.", // Daily learning dashboard
-      "Implemented adaptive difficulty scoring using reinforcement learning, improving user retention **30%**.", // Reinforcement learning
-      "Reduced retrieval friction **40%** via hybrid RAG + recall scheduling engine.", // Hybrid RAG + recall scheduling engine
-    ],
-  },
-  {
-    id: 6,
-    title: "Operations Systems Engineer",
-    context: "Glass Light Hotel",
-    period: "Jul 2021 – Jun 2024",
-    subTitle: "Operations Systems Engineer | Glass Light Hotel",
-    responsibilities: [
-      "Reduced service delivery latency **20%** through process automation and workflow optimization.",
-      "Developed adaptive procedures ensuring **100% compliance** with dietary and safety requirements.",
-      "Created an internal order management system improving guest satisfaction **35%**.",
-      "Managed **50+ daily high-volume tasks** while maintaining consistent operational quality.",
+      "Executed high-volume service in fast-paced kitchens, producing 100+ dishes per shift with strict quality and timing standards.",
+      "Controlled food costs through portion oversight, stock rotation, and waste inspection across multiple establishments.",
+      "Maintained compliance with sanitation and safety standards in regulated food-handling environments.",
+      "Managed prep, plating, and station readiness during peak rush periods while maintaining consistency and presentation quality.",
+      "Processed inventory shipments, rotated stock, and reduced spoilage through disciplined storage protocols.",
+      "Worked directly in open-kitchen environments, handling real-time customer interaction and issue resolution.",
     ],
   },
 ];
